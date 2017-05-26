@@ -235,15 +235,3 @@ Within the ajax callback, GET parameters and user-defined globals are passed thr
 > ```
 
 
-
----
-
----
-
-## To Dos:
-- [x] Test with archive
-- [x] Test with custom post type
-- [X] Test with custom page template
-- [ ] Test with custom taxonomy
-- [ ] Package as a composer dependency
-
