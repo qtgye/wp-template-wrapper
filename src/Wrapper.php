@@ -1,6 +1,6 @@
 <?php
 
-namespace QtGye\TemplateWrapper;
+namespace QtGye\WPTemplateWrapper;
 
 
 /**
