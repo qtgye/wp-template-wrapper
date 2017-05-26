@@ -13,5 +13,7 @@
         "psr-4": {
             "QtGye\\WPTemplateWrapper\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable" : true
 }
