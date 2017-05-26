@@ -1,0 +1,17 @@
+{
+    "name": "qtgye/wp-template-wrapper",
+    "description": "A better way to organize Wordpress templates.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "qtgye",
+            "email": "buquia.jace@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "QtGye\\WPTemplateWrapper\\": "src/"
+        }
+    }
+}
