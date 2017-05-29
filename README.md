@@ -6,6 +6,7 @@ A better way to organize Wordpress templates.
 
 - [Organized Template Files](#template-files)
 - [Template Based Routing](#routes)
+- [Template Wrapper](#wrapper)
 - [Template Includes](#template-includes)
 - [Template Data](#template-data)
 - [AJAX Routes](#ajax-routes)
@@ -94,6 +95,20 @@ add_filter( 'template_routes', function () {
 > ***Note:***  
 > A "slugged" route doesnt require a template counterpart. Just like wordpress's template hierarchy, it will use the available template for that slug.
 > That is, a `page/about` route will use `templates/page.php` if `templates/page/about.php` is not available.
+
+
+
+
+
+
+<a name="wrapper"></a>
+## Template Wrapper
+
+This is inspired by **scribu**'s [theme wrapper](http://scribu.net/wordpress/theme-wrappers.html) which also implemented in Sage starter themes.  
+It allows you to have your main layout in `wrapper.php`, and the main template will be automatically wrapped with it.
+It prevents code repition caused by using `get_header()` or `get_footer()` at each main template.
+
+
 
 
 
@@ -234,4 +249,10 @@ Within the ajax callback, GET parameters and user-defined globals are passed thr
 > }
 > ```
 
+
+
+---
+---
+### TODOs:
+- [] Multiple wrappers
 
