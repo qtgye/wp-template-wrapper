@@ -25,11 +25,11 @@ Any template files at the theme's root folder will not work
 Template Wrapper transforms wordpress's default template file naming to provide better organization of the files.  
 'Slugged' template files, i.e. `single-{post_type|post_name|post_id}` etc., are grouped in a subdirectory named to that type.
 
-> ***Example:***
-> - `templates/single/post.php` will be used in place of `single-post.php`.
-> - `templates/page/about-us.php` will be used in place of `page-about-us.php`.
-> - `templates/archive/4.php` will be used in place of `archive-4.php`.
-> - Template-type files will still be used as is; e.g., `templates/single.php`, `templates/page.php`, etc.
+***Example:***
+- `templates/single/post.php` will be used in place of `single-post.php`.
+- `templates/page/about-us.php` will be used in place of `page-about-us.php`.
+- `templates/archive/4.php` will be used in place of `archive-4.php`.
+- Template-type files will still be used as is; e.g., `templates/single.php`, `templates/page.php`, etc.
 
 In general, files are organized by `{type}/{slug|id|custom-name}.php` format.
 
@@ -43,7 +43,7 @@ Template Wrapper uses custom page template files **only for registration** in th
 That is, custom page template files will not be used as "views".  
 You have to create a file of the same name in the `templates/page` folder.
 
-> ***Example:***  
+***Example:***  
 > To use a custom "Donate Page Template" using `custom-donate-page.php`,  
 > Create one in the `page-templates` folder as a registry, containing only the template name.  
 > Create another one in the `templates/page` folder as a "view". This will be the one rendering your view.
@@ -77,24 +77,25 @@ add_filter( 'template_routes', function () {
 ---
 
 ***Example:***
-> ```
->	// Matches is_single(), using a function name
->	'single' => 'post_data',
->	// Matches 'project' post type single, Using a static class method
->	'single/project' => [ 'MyControllerClass', 'project_single' ],
->	// Matches single for a post_id of 12
->	'single/12' => [ 'MyControllerClass', 'project_single' ],
->	// Will match about page, using a namespaced class method
->	'page/about' => [ '\\MyNamespace\\AnotherController', 'about' ],
->	// Will match a custom page template registered in `page-templates/custom-page.php`
->	'page/custom-page' => [ 'MyControllerClass', 'custom_page_data' ],
-> 	// Will match any page or single which is not registered in route
->	'page' => 'any_page_data',
->	'single' => 'any_single_data',
-> ```
-> ***Note:***  
-> A "slugged" route doesnt require a template counterpart. Just like wordpress's template hierarchy, it will use the available template for that slug.
-> That is, a `page/about` route will use `templates/page.php` if `templates/page/about.php` is not available.
+```
+	// Matches is_single(), using a function name
+	'single' => 'post_data',
+	// Matches 'project' post type single, Using a static class method
+	'single/project' => [ 'MyControllerClass', 'project_single' ],
+	// Matches single for a post_id of 12
+	'single/12' => [ 'MyControllerClass', 'project_single' ],
+	// Will match about page, using a namespaced class method
+	'page/about' => [ '\\MyNamespace\\AnotherController', 'about' ],
+	// Will match a custom page template registered in `page-templates/custom-page.php`
+	'page/custom-page' => [ 'MyControllerClass', 'custom_page_data' ],
+ 	// Will match any page or single which is not registered in route
+	'page' => 'any_page_data',
+	'single' => 'any_single_data',
+ ```
+ 
+***Note:***  
+A "slugged" route doesnt require a template counterpart. Just like wordpress's template hierarchy, it will use the available template for that slug.
+That is, a `page/about` route will use `templates/page.php` if `templates/page/about.php` is not available.
 
 
 
@@ -161,23 +162,23 @@ The route callable handles the data being passed to the template.
 Through **reflection**, the callable may receive user-defined globals as arguments.
 
 ***Example:***
-> ```php
-> class MyControllerClass {
->	
->	// Using the $post global
->	static function about_page ( $post ) {
->
->		$data = [];
->
->		$data['id'] = $post->ID;
->		$data['slug'] = $post->name;
->
->		// The variables $id and $slug are now available in the template
->		return $data;
-> 
->	}
-> }
-> ```
+```php
+ class MyControllerClass {
+	
+	// Using the $post global
+	static function about_page ( $post ) {
+
+		$data = [];
+
+		$data['id'] = $post->ID;
+		$data['slug'] = $post->name;
+
+		// The variables $id and $slug are now available in the template
+		return $data;
+ 
+	}
+ }
+ ```
 
 ---
 ### Global Data
@@ -185,18 +186,18 @@ Through **reflection**, the callable may receive user-defined globals as argumen
 The user-defined global data is defined in the `src/global.php` through the `template_global_data` hook. These globals are available within templates.  
 
 ***Example:***
-> ```php
-> // src/global.php
->
-> add_filter('template_global_data', function ( $predefined_globals )
-> {
->	// For some reason, use $wp_roles global
->	global $wp_roles;
->	
->	// $wp_roles variable is now ready to be used in the templates
->	return compact('wp_roles');
->});
-> ```
+```php
+ // src/global.php
+
+ add_filter('template_global_data', function ( $predefined_globals )
+ {
+	// For some reason, use $wp_roles global
+	global $wp_roles;
+	
+	// $wp_roles variable is now ready to be used in the templates
+	return compact('wp_roles');
+});
+ ```
 
 Template Wrapper provides pre-defined globals to which user-defined globals are merged:  
 **$wp, $wpdb, $wp_query, $post, $authordata, $page;**
@@ -213,41 +214,41 @@ Template Wrapper provides a way to handle ajax routing using action.
 
 
 Register ajax routes through the `ajax_routes` hook.  
-> ```php
->	// src/routes.php
->
->	add_action( 'ajax_routes', function () {
->
->		return array(
->			// Matches ?action=items
->			'items' => [ "MyController", "ajax" ],
->		);
->
->	});
-> ```
+ ```php
+	// src/routes.php
+
+	add_action( 'ajax_routes', function () {
+
+		return array(
+			// Matches ?action=items
+			'items' => [ "MyController", "ajax" ],
+		);
+
+	});
+ ```
 
 Within the ajax callback, GET parameters and user-defined globals are passed through **reflection**.  
 
-> ```php
-> class MyController {
->	
->	// Handling ?action=items&filter=all&page=3
->	// The argument names should match the GET parameter names. Hence, order is irrelevant.
->	static function ajax ( $page, $filter, $post ) {
->		
->		// $filter === 'all'
->		// $page === '3'
->		$response = [
->			'items' => get_filtered_posts( $filter, $page),
->			'current_id' => $post->ID,
->		];
->		
->		// Returned data is sent as json-encoded response.
->		return $response;
-> 
->	}
-> }
-> ```
+ ```php
+ class MyController {
+	
+	// Handling ?action=items&filter=all&page=3
+	// The argument names should match the GET parameter names. Hence, order is irrelevant.
+	static function ajax ( $page, $filter, $post ) {
+		
+		// $filter === 'all'
+		// $page === '3'
+		$response = [
+			'items' => get_filtered_posts( $filter, $page),
+			'current_id' => $post->ID,
+		];
+		
+		// Returned data is sent as json-encoded response.
+		return $response;
+ 
+	}
+ }
+ ```
 
 
 
