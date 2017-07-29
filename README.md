@@ -1,6 +1,6 @@
 # WP Template Wrapper
 
-A better way to organize Wordpress templates.
+A better way to develop Wordpress templates.
 
 ## Features
 
